@@ -1,11 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { host } from './constants/host'
+import { port as defaultPort } from './constants/port'
 import { store } from './store'
 import { postLog } from './store/log/logSlice'
 
 const app = express()
-const port = process.env.PORT || '9000'
+const port = process.env.PORT || defaultPort
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -23,5 +25,5 @@ app.post('/log', (req, res) => {
 app.listen(port, err => {
   if (err) return console.error(err)
 
-  return console.log(`server is listening on ${port}`)
+  return console.log(`server is listening on http://${host}:${port}`)
 })
